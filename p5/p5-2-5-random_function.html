@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="src/js/p5.js"></script>
+    <script src="src/js/p5.dom.js"></script>
+    <script src="src/js/sketch.js"></script>
+
+    <title>random function</title>
+    <style>
+        * {margin: 0;; padding: 0;}
+    </style>
+
+    <script>
+        /* random(min, max); */
+
+        var spot = {
+            x: 0,
+            y: 0
+        }
+
+        var col = {
+            r: 0,
+            g: 0,
+            b: 0,
+            a: 0
+        }
+
+        var obj = {
+            w: 0
+        }
+
+        function setup() {
+            createCanvas(800, 800);
+            background('black');
+
+        }
+
+        function draw() {
+            spot.x = random(0, width);
+            spot.y = random(0, height);
+
+            col.r = random(0, 255);
+            col.g = random(0, 255);
+            col.b = random(0, 255);
+            col.a = random(50, 200);
+
+            obj.w = random(20, 100);
+
+            fill(col.r, col.g, col.b, col.a);
+            noStroke();
+            ellipse(spot.x, spot.y, obj.w, obj.w);
+        }
+    </script>
+</head>
+<body>
+</body>
+</html>

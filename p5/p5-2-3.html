@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="src/js/p5.js"></script>
+    <script src="src/js/p5.dom.js"></script>
+    <script src="src/js/sketch.js"></script>
+
+
+    <title>JavaScript Objects</title>
+    <style>
+        * {margin: 0;; padding: 0;}
+    </style>
+
+    <script>
+
+        var circle = {
+            x: 0,
+            y: 200,
+            diameter: 50,
+            r: 218,
+            g: 160,
+            b: 221
+        }
+
+
+        function setup() {
+            createCanvas(800, 800);
+        }
+
+        //draw는 requestAnimationFrame을 호출하고 있음
+        //noLoop를 사용하면 cancel이 가능하다
+        function draw() {
+            //background
+            background(circle.r, circle.g, circle.b,);
+
+            //ellipse
+            fill(250, 200, 200);
+            ellipse(circle.x, circle.y, circle.diameter, circle.diameter);
+
+            if(circle.x <= width-700) {
+                circle.x++;
+            } else if (circle.x >= 0) {
+                circle.x--;
+            }
+
+
+
+            console.log(circle.x);
+        }
+    </script>
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="src/js/p5.js"></script>
+    <script src="src/js/p5.dom.js"></script>
+    <script src="src/js/sketch.js"></script>
+
+
+    <title>The map() Function</title>
+    <style>
+        * {margin: 0;; padding: 0;}
+    </style>
+
+    <script>
+
+        var r = 0;
+        var b = 255;
+
+        function setup() {
+            createCanvas(600, 400);
+        }
+
+        function draw() {
+            //background
+
+            r = map(mouseX, 0, width, 0, 255);
+            b = map(mouseX, 0, width, 0, 50); //mouseX는 현재 좌표를 의미하며 0 ~ width 만큼의 값을 움직였을 때 0 ~ 50의 값을 표시해준다
+
+            console.log(mouseX, r, b);
+
+            background(r, 0, b);
+
+            //ellipse
+            fill(250, 200, 200);
+            ellipse(mouseX, mouseY, 64, 64);
+        }
+    </script>
+</head>
+<body>
+</body>
+</html>

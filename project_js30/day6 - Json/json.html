@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>day6 - json</title>
+    <style>
+        * { margin: 0; padding: 0; }
+
+    </style>
+</head>
+<body>
+    <section>
+        <p>
+            <input type="text">
+        </p>
+
+        <ul>
+            <li></li>
+        </ul>
+    </section>
+
+    <script>
+        const endpoint = "colors.json";
+        const cities = [];
+
+        fetch(endpoint).then(blob => console.log(blob));
+    </script>
+</body>
+</html>
+

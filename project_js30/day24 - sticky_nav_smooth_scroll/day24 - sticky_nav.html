@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>day24 - Sticky Nav</title>
+    <style>
+        * { margin: 0; padding: 0; }
+        a {text-decoration: none;}
+        .visual { height: 400px; background-color: #eaeaea; }
+        header { background-color: #666; }
+        header .inner { display: flex; }
+
+        header,
+        header .inner h1,
+        header .inner a { height: 60px; }
+
+        header .inner h1 {
+            transition: all 0.4s; line-height: 1;
+            display: flex; justify-content: center; align-items: center; width: 200px; background-color: gold;
+            }
+        header .inner nav { display: flex; flex: 1; }
+        header .inner nav a { display: flex; flex: 1; justify-content: center; align-items: center; color: #fff; font-size: 24px; }
+        header .inner nav a:nth-of-type(even) { background-color: #999; }
+
+        header.sticky,
+        header.sticky .inner h1,
+        header.sticky .inner a { height: 40px; }
+
+        header.sticky { position: fixed; top: 0; left: 0; width: 100%;}
+        header.sticky h1 { overflow: hidden; width: 0; }
+
+        main {
+            overflow: hidden;
+            background-color: #333; color: #fff;
+        }
+
+        header.sticky + main {margin-top: 50px;}
+
+        dl {}
+        dl dt {height: 50px; font-size: 22px; text-transform: uppercase;}
+        dl dd {height: 1000px;}
+    </style>
+</head>
+<body>
+    <div class="visual"></div>
+    <header>
+        <div class="inner">
+            <h1 onclick="test()">LOGO</h1>
+            <nav>
+                <a href="javascript: void(0);" onclick="el_find('#menu1')">MENU1</a>
+                <a href="javascript: void(0);" onclick="el_find('#menu2')">MENU2</a>
+                <a href="javascript: void(0);" onclick="el_find('#menu3')">MENU3</a>
+                <a href="javascript: void(0);" onclick="el_find('#menu4')">MENU4</a>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <dl id="menu1">
+            <dt>menu1</dt>
+            <dd>menu1 cnt</dd>
+        </dl>
+
+        <dl id="menu2">
+            <dt>menu2</dt>
+            <dd>menu1 cnt</dd>
+        </dl>
+
+        <dl id="menu3">
+            <dt>menu3</dt>
+            <dd>menu1 cnt</dd>
+        </dl>
+
+        <dl id="menu4">
+            <dt>menu4</dt>
+            <dd>menu1 cnt</dd>
+        </dl>
+    </main>
+
+    <script>
+        let i = 0;
+        function test() {
+            console.log(i);
+            i++;
+            id = requestAnimationFrame(test);
+
+            if(i == 1000) {
+                cancelAnimationFrame(id);
+            }
+        }
+    </script>
+
+    <script>
+        //중간 과정에 관련된 함수가 필요하다.
+        //현재는 끝만 보고 가는 것 같다고 생각된다.
+
+        // fn scroll을 이쁘게 정리하고 싶다.
+        const header = document.querySelector('header');
+        const header_y = header.offsetTop;
+        let id = '';
+
+        function el_find(selector) {
+            const doc_h = document.documentElement.scrollHeight;
+            const win_h = window.innerHeight;
+
+            //console.log('a', window.innerHeight, document.documentElement.clientHeight, document.documentElement.scrollHeight);
+
+            const el = document.querySelector(selector);
+
+            function scroll() {
+                let el_pos = el.offsetTop;
+                let current_pos = window.scrollY;
+                let last_pos;
+
+                if (current_pos < el_pos ) {
+                    last_pos = current_pos + 50;
+
+                    if (last_pos >= el_pos || current_pos + win_h == doc_h) {
+                        cancelAnimationFrame(id);
+                        return;
+                    } else {
+                        id = requestAnimationFrame(scroll);
+                    }
+
+                } else if (current_pos > el_pos) {
+                    last_pos = current_pos - 50;
+
+                    if (last_pos <= el_pos) {
+                        cancelAnimationFrame(id);
+                        return;
+                    } else {
+                        id = requestAnimationFrame(scroll);
+                    }
+                }
+                window.scroll(0, last_pos);
+            }
+            scroll();
+        }
+
+        function scroll_pos() {
+            if(window.scrollY >= header_y) {
+                header.classList.add('sticky');
+            } else {
+                header.classList.remove('sticky');
+            }
+        }
+
+        window.addEventListener('scroll', scroll_pos);
+    </script>
+</body>
+</html >

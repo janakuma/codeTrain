@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>day16 - Text Shadow on Mouse Move Effect</title>
+    <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; }
+        body { font-family: 'Righteous'; }
+        .hero { display: flex; justify-content: center; align-items: center; height: 100vh; }
+        h1 { font-size: 80px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>
+            BATTLE GROUNDS
+        </h1>
+    </div>
+
+
+    <script>
+        const hero = document.querySelector('.hero');
+        const text = hero.querySelector('h1');
+        const walk = 100;
+        function shdow(e) {
+            /*
+                아래와 같이 간략하게 변경이 가능하다.
+                const width = hero.offsetWidth;
+                const height = hero.offsetHeight;
+            */
+
+            const { offsetWidth: width, offsetHeight: height } = hero;
+            let { offsetX: x, offsetY: y } = e;
+
+            //console.log('x:' + width, '/ y:' + height);
+            //console.log(this, e.target);
+
+            if(this !== e.target) {
+                x = x + e.target.offsetLeft;
+                y = y + e.target.offsetTop;
+            }
+
+            const xWalk = Math.round((x / width * walk) - ( walk / 2 ));
+            const yWalk = Math.round((y / height * walk) - ( walk / 2 ));
+
+            text.style.textShadow = `
+                ${xWalk}px ${yWalk}px 0 rgba(0,0,0,0.2),
+                ${xWalk}px ${yWalk * -1}px 0 rgba(0,0,0,0.2),
+                ${yWalk}px ${xWalk}px 0 rgba(0,0,0,0.2),
+                ${yWalk * -1}px ${xWalk}px 0 rgba(0,0,0,0.2)
+            `;
+        }
+        hero.addEventListener('mousemove', shdow);
+    </script>
+</body>
+</html>

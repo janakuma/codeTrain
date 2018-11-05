@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>day10 -Checkbox Challenge</title>
+    <style>
+        * { margin: 0; padding: 0; }
+        .inbox { border: 2px solid #333; }
+        .inbox .item * {vertical-align: middle; }
+        .inbox .item input[type="checkbox"] {width: 20px; height: 20px; }
+        .inbox .item p { display: inline-block; }
+        .inbox .item input:checked + p { text-decoration: line-through; }
+    </style>
+</head>
+<body>
+    <div class="inbox">
+        <div class="item">
+            <input type="checkbox" name="" id="0">
+            <p>this is an inbox layout</p>
+        </div>
+
+        <div class="item">
+            <input type="checkbox" name="" id="1">
+            <p>this is an inbox layout</p>
+        </div>
+
+        <div class="item">
+            <input type="checkbox" name="" id="2">
+            <p>this is an inbox layout</p>
+        </div>
+
+        <div class="item">
+            <input type="checkbox" name="" id="3">
+            <p>this is an inbox layout</p>
+        </div>
+
+        <div class="item">
+            <input type="checkbox" name="" id="4">
+            <p>this is an inbox layout</p>
+        </div>
+
+        <div class="item">
+            <input type="checkbox" name="" id="5">
+            <p>this is an inbox layout</p>
+        </div>
+    </div>
+
+    <script>
+        const checkboxes = document.querySelectorAll('.inbox input[type="checkbox"]');
+
+        let lastChecked;
+        function handleCheck(e) {
+            let inBetween = false;
+
+            if(e.shiftKey && this.checked) {
+                checkboxes.forEach(checkbox => {
+
+                    if(checkbox === this || checkbox === lastChecked) {
+                        inBetween = !inBetween;
+                    }
+
+                    if(inBetween) {
+                        checkbox.checked = true;
+                    }
+                });
+            };
+            lastChecked = this;
+            //console.log(lastChecked);
+        }
+        checkboxes.forEach(checkbox => checkbox.addEventListener('click', handleCheck));
+    </script>
+</body>
+</html>
+

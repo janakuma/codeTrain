@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Day3 - CSS Variables</title>
+    <style>
+        * {margin: 0; padding: 0;}
+        :root {
+            --base: #ffc600;
+            --spacing: 10px;
+            --blur: 10px;
+        }
+        body { font-size: 50px; text-align: center; color: #fff; background-color: #193549; }
+        img { padding: var(--spacing); background-color: var(--base); filter: blur(var(--blur)); }
+
+        .hl { color: var(--base); }
+
+        .controls { margin: 50px; }
+        .controls label{ text-transform: capitalize; }
+    </style>
+</head>
+<body>
+    <h2>UPDATE CSS Variables with <span class="hl">JS</span></h2>
+
+    <div class="controls">
+        <label for="spacing">spacing</label>
+        <input type="range" name="spacing" min="10" max="200" value="10" data-sizing="px">
+
+        <label for="blur">blur</label>
+        <input type="range" name="blur" min="0" max="25" value="10" data-sizing="px">
+
+        <label for="base">base color</label>
+        <input type="color" name="base" value="#ffc600">
+    </div>
+
+    <img src="https://travelblog.expedia.co.kr/wp-content/uploads/2015/10/IMG_7005.jpg">
+
+    <script>
+        const input = document.querySelectorAll('.controls input');
+
+        function handleUpdate() {
+            const suffix = this.dataset.sizing || '';
+            document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix)
+        }
+        input.forEach(input => input.addEventListener('change', handleUpdate));
+        input.forEach(input => input.addEventListener('mousemove', handleUpdate)); //mousemove만 사용해도 괜찮다
+    </script>
+</body>
+</html>

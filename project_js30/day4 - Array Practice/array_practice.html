@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>day4 - Array Practice</title>
+    <style>
+        * {margin: 0; padding: 0;}
+
+    </style>
+</head>
+<body>
+
+    <ul class="mw-category">
+        <li><a href="/wiki/Red-capped_parrot" title="Red-capped parrot">Red-capped parrot</a></li>
+        <li><a href="/wiki/Antiochus_XII_Dionysus" title="Antiochus XII Dionysus">Antiochus XII Dionysus</a></li>
+        <li><a href="/wiki/Ubinas" title="Ubinas">Ubinas</a></li>
+        <li><a href="/wiki/A_Christmas_Carol" title="A Christmas Carol">A Christmas Carol</a></li>
+        <li><a href="/wiki/U-1-class_submarine_(Austria-Hungary)" title="U-1-class submarine (Austria-Hungary)">U-1-class submarine (Austria-Hungary)</a></li>
+        <li><a href="/wiki/The_Cloisters" title="The Cloisters">The Cloisters</a></li>
+        <li><a href="/wiki/Sandringham_House" title="Sandringham House">Sandringham House</a></li>
+        <li><a href="/wiki/Head_over_Heels_(U.S._TV_series)" title="Head over Heels (U.S. TV series)">Head over Heels (U.S. TV series)</a></li>
+        <li><a href="/wiki/Missouri_Centennial_half_dollar" title="Missouri Centennial half dollar">Missouri Centennial half dollar</a></li>
+        <li><a href="/wiki/Nihonium" title="Nihonium">Nihonium</a></li>
+        <li><a href="/wiki/Muhammad_I_of_Granada" title="Muhammad I of Granada">Muhammad I of Granada</a></li>
+        <li><a href="/wiki/Cetiosauriscus" title="Cetiosauriscus">Cetiosauriscus</a></li>
+        <li><a href="/wiki/%C3%86thelbald,_King_of_Wessex" title="Æthelbald, King of Wessex">Æthelbald, King of Wessex</a></li>
+        <li><a href="/wiki/Tower_Hill_Memorial" title="Tower Hill Memorial">Tower Hill Memorial</a></li>
+        <li><a href="/wiki/Political_Animals_and_Animal_Politics" title="Political Animals and Animal Politics">Political Animals and Animal Politics</a></li>
+    </ul>
+
+    <script>
+        const inventors = [
+            { first: 'Albert3', last: 'Einstein3', year: 1560, passed: 1955 },
+            { first: 'Albert4', last: 'Einstein4', year: 1600, passed: 1955 },
+            { first: 'Albert1', last: 'Einstein1', year: 1500, passed: 1955 },
+            { first: 'Albert7', last: 'Einstein6', year: 1760, passed: 1955 },
+            { first: 'Albert5', last: 'Einstein5', year: 1630, passed: 1955 },
+            { first: 'Albert6', last: 'Einstein6', year: 1660, passed: 1955 },
+            { first: 'Albert9', last: 'Einstein6', year: 2060, passed: 2100 },
+            { first: 'Albert8', last: 'Einstein6', year: 1860, passed: 1955 },
+            { first: 'Albert9', last: 'Einstein6', year: 1960, passed: 2000 },
+            { first: 'Albert2', last: 'Einstein2', year: 1530, passed: 1955 },
+        ];
+
+        const fruit = [
+            'Apple', 'Apricot', 'Avocado', 'Banana', 'Bilberry', 'Blackberry', 'Blackcurrant',
+            'Blueberry', 'Boysenberry', 'Currant', 'Cherry', 'Cherimoya', 'Chico fruit', 'Cloudberry',
+            'Coconut', 'Cranberry', 'Cucumber', 'Sugar apple', 'Damson', 'Date', 'Dragonfruit', 'Durian',
+            'Elderberry', 'Feijoa', 'Fig', 'Goji berry', 'Gooseberry', 'GrapeRaisin', 'Grapefruit',
+            'Guava', 'Honeyberry', 'Huckleberry', 'Jabuticaba', 'Jackfruit', 'Jambul', 'Jujube',
+            'Juniper berry', 'Kiwifruit', 'Kumquat', 'Lemon', 'Lime', 'Loquat', 'Longan', 'Lychee',
+            'Mango', 'Marionberry', 'Miracle fruit', 'Mulberry', 'Nectarine', 'Nance', 'Olive',
+            'Papaya', 'Passionfruit', 'Peach', 'Pear', 'Persimmon', 'Physalis', 'Plantain', 'PlumPrune (dried plum)',
+            'Pineapple', 'Plumcot (or Pluot)', 'Pomegranate', 'Pomelo', 'Purple mangosteen', 'Quince', 'RaspberrySalmonberry',
+            'Rambutan', 'Redcurrant', 'Salal berry', 'Salak', 'Satsuma', 'Soursop', 'Star fruit', 'Solanum quitoense', 'Strawberry',
+            'Tamarillo', 'Tamarind', 'Ugli fruit', 'Yuzu', 'Avocado', 'Chili pepper', 'Corn kernel', 'Cucumber', 'Eggplant',
+            'Olive', 'Pea', 'Squash', 'Sunflower seed', 'Tomato'
+        ];
+
+
+        //1. array.prototype.filter()
+        //filter는 조건에 해당되는 모든 정보를 출력
+        /*
+        const fifteen = inventors.filter(function(inventor) {
+            if(inventor.year >= 1500 && inventor.year < 1800) {
+                return true;
+            }
+        })
+        */
+        const fifteen = inventors.filter(inventor => inventor.year >= 1860 && inventor.year < 2060);
+        console.table(fifteen);
+
+        //2. array.prototype.map()
+        //map은 조건에 해당되는 필요한 정보만 출력이 가능하다.
+        const fullnames = inventors.map(inventor => `${inventor.first}` + ' ' + `${inventor.last}`)
+        console.log(fullnames);
+
+        //filter와 map의 응용(chain)
+        //- 필요로 하는 정보의 조건을 이용해서 출력
+        const fifteen1 = inventors
+            .filter(inventor => inventor.year >= 1860 && inventor.year < 2060)
+            .map(inventor => inventor.first + ' ' + inventor.last);
+
+        console.table(fifteen1);
+
+        //3. array.prototype.sort()
+        /*
+        const ordered = inventors.sort(function(a, b) {
+            if(a.year > b.year) {
+                return 1; //참은 숫자 1, 거짓은 숫자 0
+            } else {
+                return -1;
+            }
+        });
+        */
+        const ordered = inventors.sort((a,b) => a.year > b.year ? 1 : -1);
+        console.table(ordered)
+
+        //4. array.prototype.reduce()
+        //let totalYears = 0;
+        /* for (var  i =0; i < inventors.length; i++) {
+            totalYears += inventors[i].year
+        } */
+
+        const totalYears = inventors.reduce((total, inventor) => {
+            return total + (inventor.passed - inventor.year)
+        }, 0); //0은 초기값
+        console.log(totalYears)
+
+        //6.
+        const category = document.querySelector('.mw-category');
+        const links = Array.from(category.querySelectorAll('a'));
+
+
+        const de = links
+            .map(link => link.textContent)
+            //.filter(streetName => streetName.includes('de'));
+
+        console.log(de)
+
+
+
+
+    </script>
+
+</body>
+</html>
+

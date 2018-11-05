@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>GRID - 14</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="item item1">
+            <p>#1</p>
+        </div>
+        <div class="item item2">
+            <p>#content</p>
+        </div>
+        <div class="item item3">
+            <p>#2</p>
+        </div>
+        <div class="item footer">
+            <p>FOOTER</p>
+        </div>
+    </div>
+
+
+    <!--
+    그리드 형태에서 시작하는 곳과 끝나는 곳을 설정
+    * grid-column-start / grid-column-end
+
+    SHOR CUT
+    * grid-column: start/end;
+    * grid-column: span 합쳐지는 갯수 /end;
+    * grid-column: start/span 합쳐지는 갯수
+    -->
+
+    <style>
+        * {margin: 0; padding: 0;}
+        :root {
+            --borderColor: #eee;
+            /*
+                변수로 사용하기 (--로 시작)
+                사용할 때는 var(변수명)
+            */
+        }
+
+        body {
+            font-family: sans-serif;
+
+
+        }
+        .wrapper {
+            display: grid; grid-gap: 20px; padding: 50px;
+            grid-template-columns: 1fr 3fr 1fr;
+            grid-template-rows: 150px 150px 100px;
+            grid-template-areas:
+            "sidebar-1  content  sidebar-2"
+            "sidebar-1  content  sidebar-2"
+            "footer     footer   footer"
+        }
+        .item {
+            box-sizing: border-box; border: 3px solid gold;
+            background-color: orange; color: #000; font-size: 20px; text-align: center;
+        }
+
+        .item1 { grid-area: sidebar-1; }
+        .item2 { grid-area: content; }
+        .item3 { grid-area: sidebar-2; }
+        .footer { grid-area: footer; }
+
+        /*
+            min-width: 700px - 700px 이상일 때 블랙
+            max-width: 700px - 700px 이하일 때 블랙
+        */
+
+        @media(max-width: 700px) {
+            .wrapper {
+                background-color: #000;
+                grid-template-areas:
+                    "content    content     content"
+                    "sidebar-1  sidebar-1  sidebar-2"
+                    "footer     footer      footer"
+            }
+
+
+        }
+    </style>
+</body>
+</html>

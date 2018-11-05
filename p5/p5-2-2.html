@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="src/js/p5.js"></script>
+    <script src="src/js/p5.dom.js"></script>
+    <script src="src/js/sketch.js"></script>
+
+
+    <title>Errors & Console</title>
+    <style>
+        * {margin: 0;; padding: 0;}
+    </style>
+
+    <script>
+        function setup() {
+            createCanvas(800, 800);
+            background('black');
+        }
+
+        //draw는 requestAnimationFrame을 호출하고 있음
+        //noLoop를 사용하면 cancel이 가능하다
+        function draw() {
+            noStroke();
+            fill(255, 255, 0, 255);
+            ellipse(mouseX, mouseY, 2, 2);
+        }
+
+        function mousePressed() {
+            background('navy')
+        }
+    </script>
+</head>
+<body>
+</body>
+</html>

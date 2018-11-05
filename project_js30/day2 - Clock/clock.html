@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JS CLOCK</title>
+    <style>
+        * {margin: 0; padding: 0;}
+        body { font-size: 14px; }
+        .clock { position: relative; width: 400px; height: 400px; border: 14px solid black; border-radius: 50%; margin: 50px auto; position: relative; padding: 20px }
+
+        .state {position: absolute; top: 0; left: 50%; width: 80px; height: 80px; transform: translate(-50%, 0);}
+        .state.light { background: url('img/sun.png') no-repeat 0 0; background-size: 100%; }
+        .state.night { width: 80px; height: 80px; background: url('img/moon.png') no-repeat 0 0; background-size: 100%; }
+
+        .clock-face { position: relative; width: 100%; height: 100%;}
+        .hand {
+            width: 50%; background-color: #000; position: absolute; top: 50%; left: 50%;
+            transform-origin: 100%; transform: rotate(90deg);
+        }
+        .hour-hand { width: 30%; height: 14px; margin-left: -30%; margin-top: -7px; }
+        .min-hand { width: 50%; height: 4px; margin-top: -2px; margin-left: -50%; }
+        .second-hand { width: 50%; height: 1px;; margin-left: -50%; }
+
+
+    </style>
+</head>
+<body>
+    <p class="digital"></p>
+
+    <div class="clock">
+        <div class="clock-face">
+            <span class="hand hour-hand"></span>
+            <span class="hand min-hand"></span>
+            <span class="hand second-hand"></span>
+            <i class="state"></i>
+        </div>
+    </div>
+
+    <script>
+        function setDate() {
+
+            //new Date
+            const now = new Date();
+            const hour = now.getHours();
+            const min = now.getMinutes();
+            const second = now.getSeconds();
+
+            //default
+            const defaultDgree = 90;
+            const tm_light = 6;
+            const tm_night = 19;
+
+            //gui type
+            const hourDegree = ((360 / 12) * hour) + defaultDgree;
+            const minDegree = ((360 / 60) * min) + defaultDgree;
+            const secondDegree = ((360 / 60) * second) + defaultDgree;
+
+            //text type
+            const meridiem = hour < 12 ? 'AM' : 'PM';
+            const hourDigital = hour <= 12 ? hour : hour - 12;
+            const minDigital = min < 10 ? '0' + min : min;
+            const secondDigital = second < 10 ? '0' + second : second;
+
+            //day cycle
+            const cycle = hour > tm_light && hour < tm_night ? 'light' : 'night';
+
+            document.querySelector('.hour-hand').style.transform = `rotate(${hourDegree}deg)`;
+            document.querySelector('.min-hand').style.transform = `rotate(${minDegree}deg)`;
+            document.querySelector('.second-hand').style.transform = `rotate(${secondDegree}deg)`;
+            document.querySelector('.digital').innerHTML = `${meridiem} ${hourDigital} : ${minDigital} : ${secondDigital}`;
+            document.querySelector('.state').classList.add(cycle);
+        }
+
+        setInterval(setDate, 1000);
+    </script>
+
+</body>
+</html>

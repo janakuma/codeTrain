@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MAKE A JAVASCRIPT DRUM KIT</title>
+    <style>
+        * {margin: 0; padding: 0;}
+        body {font-size: 14px;}
+        .keys {width: 100%; height: 100vh; display: flex; align-items: center; justify-content: center;}
+        .keys .key {
+            transition: all 0.1s; border-radius: 10px; width: 100px; border: 3px solid #aaa;
+            background: #eaeaea; text-align: center; margin: 0 30px 0; padding: 14px 0; font-size: 20px;
+        }
+        .keys .key.playing { transform: scale(1.1); border-color: red !important; }
+        .keys .key span {display: block;}
+        .dim {
+            opacity: 0; pointer-events: none; position: absolute; top: 0; left: 0;
+            width: 100%; height: 100vh; background-color: rgba(0,0,0,0.4); transition: all 0.4s;
+        }
+        .dim.show {display: block; opacity: 1; pointer-events: auto;}
+    </style>
+</head>
+<body>
+    <div class="keys">
+        <div data-key="65" class="key" onclick="getPosition(this)">
+            <kbd>A</kbd>
+            <span class="sound">clap</span>
+        </div>
+
+        <div data-key="83" class="key">
+            <kbd>S</kbd>
+            <span class="sound">hihat</span>
+        </div>
+
+        <div data-key="68" class="key">
+            <kbd>D</kbd>
+            <span class="sound">kick</span>
+        </div>
+    </div>
+    <audio data-key="65" src="sound/65.wav"></audio>
+    <audio data-key="83" src="sound/83.wav"></audio>
+    <audio data-key="68" src="sound/68.wav"></audio>
+
+    <script>
+        function getPosition(el) {
+            const rects = el.getBoundingClientRect();
+            console.log(el.getClientRects());
+            console.log(rects.height);
+        }
+
+        function showdim(e) {
+            const dim = document.querySelector('.dim');
+
+
+            /* if(e.keyCode === 27 && !(dim.classList.contains("show"))) {
+                dim.classList.add('show');
+            } else if (e.keyCode === 27 && dim.classList.contains("show")) {
+                dim.classList.remove('show');
+                //dim.classList.remove('show', 'test'); //multiple remove
+            } */
+
+            if (e.keyCode === 27) {
+                dim.classList.toggle('show');
+            } //toggle로 하는 간단한 방법도 있다.
+            //console.log(dim.classList.contains("show"));  //classname 포함 여부를 확인하고 싶을 때 contains를 사용한다.
+        }
+
+        function playsound(e) {
+            const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+            const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+            if (!audio) return;
+            audio.currrentTime = 0;
+            audio.play();
+            key.classList.add('playing');
+            console.log(audio.duration+'s'); //get Audio total time
+        }
+
+        function removeTransition(e) {
+            if(e.propertyName !== 'transform') return;
+            this.classList.remove('playing');
+        }
+        const keys = document.querySelectorAll('.key');
+        keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+
+        console.log(keys)
+
+        window.addEventListener('keydown', function(e) {
+            playsound(e);
+            showdim(e);
+        }); //call multiple functions
+        //window.addEventListener('keydown', playsound); //call function
+        //window.addEventListener('keydown', showdim);  //call function.
+
+    </script>
+
+
+    <div class="dim"></div>
+    <!-- <div class="test dim show"></div> -->
+</body>
+</html>

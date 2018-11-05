@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    Sjrnfl7470
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>day5 - Flexbox Gallery</title>
+    <style>
+        * { margin: 0; padding: 0; }
+        .panels { display: flex; height: 100vh;}
+        .panels .panel,
+        .panels .panel p { flex: 1; display: flex; justify-content: center; align-items: center; }
+
+        .panels .panel { overflow: hidden; transition: all 0.2s; flex-direction: column; text-align: center; }
+        .panels .panel.open { flex: 5; }
+        .panels .panel p {transition: all 0.2s; box-sizing: border-box; border: 1px solid red; }
+
+        .panels .panel p:nth-of-type(1) { transform: translateY(-100%); }
+        .panels .panel p:nth-of-type(2) { font-size: 26px; }
+        .panels .panel p:nth-of-type(3) { transform: translateY(100%); }
+
+        .panels .panel.toggleActive p {flex: auto;}
+        .panels .panel.toggleActive p:nth-of-type(1) { transform: translateY(0); }
+        .panels .panel.toggleActive p:nth-of-type(2) { font-size: 50px; }
+        .panels .panel.toggleActive p:nth-of-type(3) { transform: translateY(0); }
+
+        .panel1 {
+            background-color: green;
+        }
+        .panel2 {
+            background-color: lightgreen;
+        }
+        .panel3 {
+            background-color: lime;
+        }
+        .panel4 {
+            background-color: yellow;
+        }
+        .panel5 {
+            background-color: orange;
+        }
+    </style>
+</head>
+<body>
+    <div class="panels">
+        <div class="panel panel1">
+            <p>Hey</p><p>Let's</p><p>Dance</p>
+        </div>
+
+        <div class="panel panel2">
+            <p>Hey</p><p>Let's</p><p>Dance</p>
+        </div>
+
+        <div class="panel panel3">
+            <p>Hey</p><p>Let's</p><p>Dance</p>
+        </div>
+
+        <div class="panel panel4">
+            <p>Hey</p><p>Let's</p><p>Dance</p>
+        </div>
+
+        <div class="panel panel5">
+            <p>Hey</p><p>Let's</p><p>Dance</p>
+        </div>
+    </div>
+
+    <script>
+        const panels = document.querySelectorAll('.panel');
+        function toggleOpen(event) {
+            panels.forEach(panel => panel.classList.remove('open'));
+            panels.forEach(panel => panel.classList.remove('toggleActive'));
+            this.classList.add('open');
+        }
+
+        function toggleActive(event) {
+            if (event.target.classList.contains('open')) {
+                this.classList.add('toggleActive');
+            }
+        }
+
+        panels.forEach(panel => panel.addEventListener('click', toggleOpen));
+        panels.forEach(panel => panel.addEventListener('transitionend', toggleActive));
+
+
+    </script>
+</body>
+</html>
+
