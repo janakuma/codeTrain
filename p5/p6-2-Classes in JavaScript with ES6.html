@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="src/js/p5.js"></script>
+    <script src="src/js/p5.dom.js"></script>
+    <script src="src/js/sketch.js"></script>
+
+    <title>Classes in JavaScript with ES6</title>
+    <style>
+        * {margin: 0;; padding: 0;}
+    </style>
+
+    <script>
+
+        let bubble1, bubble2;
+        let human;
+
+        function setup() {
+            createCanvas(600, 400);
+            bubble1 = new Bubble(200,200,40);
+            bubble2 = new Bubble(400,200,20);
+            human = new Human();
+
+            /* print(bubble.x, bubble.y);
+            print(human.man, human.woman); */
+        }
+
+        function draw() {
+            background(0);
+
+            bubble1.move();
+            bubble1.show();
+
+            bubble2.move();
+            bubble2.show();
+        }
+
+        class Bubble {
+            constructor(x, y, r) {
+                this.x = x;
+                this.y = y;
+                this.r = r;
+            }
+
+            move() {
+                this.x = this.x + random(-5, 5);
+                this.y = this.y + random(-5, 5);
+            }
+
+            show() {
+                stroke(255);
+                strokeWeight(4);
+                noFill();
+                ellipse(this.x, this.y, this.r*2);
+            }
+        }
+
+        class Human {
+            constructor() {
+                this.man = 'boy';
+                this.woman = 'girl';
+            }
+        }
+
+    </script>
+</head>
+<body>
+</body>
+</html>
+
