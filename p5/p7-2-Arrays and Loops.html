@@ -8,34 +8,28 @@
     <script src="src/js/p5.dom.js"></script>
     <script src="src/js/sketch.js"></script>
 
-    <title>What is an array</title>
+    <title>Classes in JavaScript with ES6</title>
     <style>
         * {margin: 0;; padding: 0;}
     </style>
 
     <script>
-
-        var words = ['rainbow', 'heart', 'puple', 'friendship']
-        var index = 0;
+        var nums = [150, 125, 100, 75, 50, 25];
 
         function setup() {
-            createCanvas(400, 400);
+            createCanvas(600, 400);
         }
 
         function draw() {
             background(0);
 
-            fill(255);
-            textSize(32);
-            text(words[index], 200, 100);
-        }
 
-        function mousePressed() {
-            index = index + 1;
-
-            if(index == words.length) {
-                index = 0;
-            };
+            for(var i = 0; i < nums.length - 1; i++) {
+                stroke(51);
+                strokeWeight(2);
+                fill(40 * i, 20*i , 255);
+                ellipse(100 * i + 100, 200, nums[i], nums[i])
+            }
         }
     </script>
 </head>

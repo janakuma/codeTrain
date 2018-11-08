@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="src/js/p5.js"></script>
+    <script src="src/js/p5.dom.js"></script>
+    <script src="src/js/sketch.js"></script>
+
+    <title>Classes in JavaScript with ES6</title>
+    <style>
+        * {margin: 0; padding: 0;}
+    </style>
+
+    <script>
+        let bubble;
+
+        function setup() {
+            createCanvas(600, 600);
+            let x = random(width);
+            let y = random(height);
+            let r = random(10, 50);
+
+            bubble = new Bubble(x,y,r);
+
+        }
+
+        function draw() {
+            background(0);
+            bubble.move();
+            bubble.show();
+        }
+
+        function mousePressed() {
+            bubble.clicked();
+        }
+
+        class Bubble {
+            constructor(x, y, r) {
+                this.x = x;
+                this.y = y;
+                this.r = r; //반지름
+            }
+
+            clicked() {
+                console.log('clicked on bubble!');
+            }
+
+            move() {
+                this.x = this.x + random(-5, 5);
+                this.y = this.y + random(-5, 5);
+            }
+
+            show() {
+                stroke(255);
+                strokeWeight(2);
+                noFill();
+                ellipse(this.x, this.y, this.r*2);
+            }
+        }
+
+    </script>
+
+
+
+
+</head>
+<body>
+</body>
+</html>

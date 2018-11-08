@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="src/js/p5.js"></script>
+    <script src="src/js/p5.dom.js"></script>
+    <script src="src/js/sketch.js"></script>
+
+    <title>Classes in JavaScript with ES6</title>
+    <style>
+        * {margin: 0;; padding: 0;}
+    </style>
+
+    <script>
+        let bubbles = [];
+
+        function setup() {
+            createCanvas(600, 600);
+
+            for(var i = 0; i < 1400; i++) {
+
+                let x = random(width);
+                let y = random(height);
+                let r = random(10, 40);
+
+
+                bubbles[i] = new Bubble(x, y, r);
+            }
+        }
+
+        function draw() {
+            background(0);
+
+            for (var i = 0; i < bubbles.length; i++) {
+                bubbles[i].move();
+                bubbles[i].show();
+            }
+        }
+
+        class Bubble {
+            constructor(x, y, r) {
+                this.x = x;
+                this.y = y;
+                this.r = r; //반지름
+            }
+
+            move() {
+                this.x = this.x + random(-5, 5);
+                this.y = this.y + random(-5, 5);
+            }
+
+            show() {
+                noStroke();
+
+                fill(random(255), random(255), 0, 5);
+                ellipse(this.x, this.y, this.r*2);
+            }
+        }
+
+        class Human {
+            constructor() {
+                this.man = 'boy';
+                this.woman = 'girl';
+            }
+        }
+
+    </script>
+</head>
+<body>
+</body>
+</html>
