@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="src/js/p5.js"></script>
+    <script src="src/js/p5.dom.js"></script>
+    <script src="src/js/sketch.js"></script>
+
+    <title>Classes in JavaScript with ES6</title>
+    <style>
+        * {margin: 0; padding: 0;}
+    </style>
+
+    <script>
+        let x = 0;
+        let y = 0;
+        let spacing = 20;
+
+        function setup() {
+            createCanvas(800, 600);
+            background(0);
+        }
+
+        function draw() {
+            stroke(255);
+            if(random(1) < 0.2) {
+                line(x, y, x + spacing, y + spacing);
+
+            } else {
+                line(x, y + spacing, x + spacing, y);
+            }
+
+            console.log(x, y);
+
+            x = x + spacing;
+
+
+            if(x> width) {
+                x = 0;
+                y = y + spacing;
+            }
+        }
+    </script>
+</head>
+<body>
+</body>
+</html>
