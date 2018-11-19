@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../src/js/p5.js"></script>
+    <script src="../src/js/p5.dom.js"></script>
+
+    <title></title>
+    <style>
+        * {margin: 0; padding: 0;}
+    </style>
+
+    <script>
+        function Drop() {
+            this.x = random(0, width);
+            this.y = random(-500, -50);
+            this.z = random(0, 20);
+            this.len = map(this.z, 0, 20, 10, 20);
+            this.yspeed = map(this.z, 0, 20, 4, 10);
+
+            this.fall = function() {
+                this.y = this.y + this.yspeed;
+                var grav = map(this.z, 0, 20, 0, 0.2); //중력
+                this.yspeed = this.yspeed + grav;
+
+                if(this.y > height) {
+                    this.y = random(-500, -50);
+                    this.yspeed = map(this.z, 0, 20, 4, 10);
+                }
+            }
+
+            this.show = function() {
+                var thick = map(this.z, 0, 20, 1, 3)
+                strokeWeight(thick);
+                stroke(138, 43, 226);
+                line(this.x, this.y, this.x, this.y + this.len);
+            }
+        }
+
+        var drops = []
+
+        function setup() {
+            createCanvas(640, 360);
+            for( var i = 0; i < 500; i++) {
+                drops[i] = new Drop;
+            }
+        };
+
+        function draw() {
+            background(230, 220, 250);
+
+            for (var i = 0; i < drops.length; i++) {
+                drops[i].fall();
+                drops[i].show();
+            }
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>
