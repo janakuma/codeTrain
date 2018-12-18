@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Classes in JavaScript with ES6</title>
+    <script>
+        var arr_test = [1,2,3,4,5];
+        var i;
+
+        function aa(test_val) {
+            return test_val.filter(x => x > 2);
+        }
+
+        for(i = 0; i < arr_test.length; i++) {
+
+            if(aa(arr_test)[i] == true) {
+                console.log('O');
+            } else {
+                console.log('X');
+            }
+
+            console.log(aa(arr_test));
+        }
+
+
+    </script>
+</head>
+<body>
+</body>
+</html>
