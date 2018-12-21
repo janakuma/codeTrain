@@ -11,7 +11,7 @@
         var i;
 
         function aa(test_val) {
-            return test_val.filter(x => x > 2);
+            return test_val.map(x => x > 2);
         }
 
         for(i = 0; i < arr_test.length; i++) {
@@ -21,11 +21,8 @@
             } else {
                 console.log('X');
             }
-
-            console.log(aa(arr_test));
+            console.log(aa(arr_test)[i]);
         }
-
-
     </script>
 </head>
 <body>
