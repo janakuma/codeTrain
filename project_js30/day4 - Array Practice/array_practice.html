@@ -30,6 +30,14 @@
         <li><a href="/wiki/Political_Animals_and_Animal_Politics" title="Political Animals and Animal Politics">Political Animals and Animal Politics</a></li>
     </ul>
 
+    <ul class="test">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+
     <script>
         const inventors = [
             { first: 'Albert3', last: 'Einstein3', year: 1560, passed: 1955 },
@@ -59,9 +67,8 @@
             'Olive', 'Pea', 'Squash', 'Sunflower seed', 'Tomato'
         ];
 
-
         //1. array.prototype.filter()
-        //filter는 조건에 해당되는 모든 정보를 출력
+        //filter는 조건에 해당되는 모든 정보를 출력 <html> ~ </html>
         /*
         const fifteen = inventors.filter(function(inventor) {
             if(inventor.year >= 1500 && inventor.year < 1800) {
@@ -119,6 +126,26 @@
             //.filter(streetName => streetName.includes('de'));
 
         console.log(de)
+
+
+        const addNumber = [1, 2, 3, 4, 5];
+        const allNumber = addNumber.reduce((total, tt) => {
+            return total = total + tt;;
+        })
+
+        console.log('allNumber', allNumber);
+
+        const ul_list = document.querySelectorAll('.test li');
+
+        ul_list.forEach(e => console.log('element', e.textContent));
+
+
+
+
+        console.log('ul_list', ul_list[0].innerHTML);
+
+
+
 
 
 

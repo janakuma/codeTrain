@@ -20,6 +20,15 @@
         </h1>
     </div>
 
+    <ul class="getList">
+        <li>a1</li>
+        <li>a2</li>
+        <li>a3</li>
+        <li>a4</li>
+        <li>a5</li>
+        <li>a6</li>
+        <li>a61</li>
+    </ul>
 
     <script>
         const hero = document.querySelector('.hero');
@@ -54,6 +63,21 @@
             `;
         }
         hero.addEventListener('mousemove', shdow);
+
+        const test = [1,2,3,4,5];
+        function aa() {
+            return test.filter(x => x>2);
+        }
+
+
+
+        const getList = document.querySelectorAll('.getList > li');
+        const getArray = [];
+
+        getList.forEach(el => getArray.push(el.innerHTML + 5));
+
+        console.log('array', getArray);
+        console.log('map', getArray.map(m =>  {m.innerHTML == 'a615'}));
     </script>
 </body>
 </html>
