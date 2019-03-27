@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="src/js/p5.js"></script>
+    <script src="src/js/p5.dom.js"></script>
+
+    <title></title>
+    <style>
+        * {margin: 0; padding: 0;}
+    </style>
+
+    <script>
+        //생성자 함수
+        function Particle() {
+            this.x = random(0, 600);
+            this.y = random(0, 300);
+            /*this.show = function() {
+                point(this.x, this.y);
+            }*/
+        }
+
+        function Confetti() {
+            Particle.call(this);
+        }
+
+        Particle.prototype.update = function() {
+            this.x += random(5, -5);
+            this.y += random(5, -5);
+
+            console.log(this.x);
+            console.log(this.y);
+        }
+
+        Particle.prototype.show = function() {
+            point(this.x, this.y);
+        };
+
+        Confetti.prototype = Particle.prototype;
+
+        var p;
+        var v;
+        var c = [];
+
+        p5.Vector.prototype.double = function() {
+            this.x *= 2;
+            this.y *= 2;
+            this.z *= 2 ;
+        }
+
+        function setup() {
+            createCanvas(600, 600);
+            p = new Particle(); //인스턴스 생성
+            v = createVector(3,4);
+
+            for(var i = 0; i < 50; i++) {
+                c[i] = new Confetti();
+            }
+        }
+
+        function draw() {
+            for(var i = 0; i < 50; i++) {
+                c[i].update();
+                c[i].show();
+            }
+
+
+
+
+
+
+        }
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

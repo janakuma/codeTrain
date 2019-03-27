@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<!-- <script>
+		// 1.scope란?
+		// 여기서 중요한 것은 외부에서 내부 변수를 참조 할 수 없다는 것이다.
+
+		var x = 'global';
+		function foo() {
+			var x = 'function scope';
+			console.log(x);
+		}
+
+		foo(); //function scope
+		console.log(x); //global
+
+		console.log('bool', 1 == true);
+		console.log('bool', 0 == false);/
+
+	</script> -->
+
+	<!-- <script>
+		// 3. 자바스크립트 스코프의 특징
+		// 함수 레벨 스코프란 함수 코드 블록 내에서 선언된 변수는 함수코드 블록내에서만 유효하고 함수 외부에서는 유효하지 않다는 것이다.
+		// 단, ECMA SCRIPT6에서 도입된 let keyword를 사용하면 블록 레벨 스코프를 사용할 수 있다.
+
+
+		var x = 0;
+		{
+			var x = 1;
+			console.log(x); //1
+		}
+		console.log(x); //1*/
+		//함수코드 블록내에서만 유효하고 함수 외부에서는 유효하지 않다는 것
+		//위와 같은결과가 나온것은 함수 블록 내가 아니기 때문이다.
+		//함수로 만들어서 다시 테스트를 한다면 1, 0이라는 값을 얻을 수 있다.
+
+
+		let  y = 0;
+		{
+			let y = 1;
+			console.log(y); //1
+		}
+		console.log(y); //-1
+		//ECMA에서는 let을 사용하여 함수가 아니여도 블록레벨 스코프에서 es5와 같은 결과를 얻을수 있다.
+	</script> -->
+
+	<!-- <script>
+		// 4. 전역 스코프(Global scope)
+
+		var global = 'global';
+
+		function foo() {
+			var local = 'local';
+			console.log(global);
+			console.log(local);
+		}
+
+		foo();
+
+		console.log(global);
+		//console.log(local); //외부에서 내부 변수를 참조 할 수 없기 때문에 에러가 발생한다.
+	</script> -->
+
+	<!-- <script>
+		var x = 'global';
+
+		function foo() {
+			var x = 'local';
+			console.log(x); //local
+
+			function bar() {
+				console.log(x); //local
+			}
+
+			bar();
+		}
+		foo();
+		console.log(x); //global
+		//내부함수는 자신을 포함하고 있는 외부함수의 변수에 접근할 수 있다.
+	</script> -->
+
+
+
+	<!-- <script>
+		var x = 10;
+
+		function foo() {
+			var x = 100;
+
+			function bar() {
+				x = 1000;
+				console.log(x);
+			}
+
+			bar();
+		}
+
+		foo(); //1000
+		console.log(x); //10
+	</script> -->
+
+	<!-- <script>
+		// 7. 렉시컬 스코프
+		var x = 1;
+
+		function foo() {
+			var x = 10;
+			bar(); //호출보다는 선언이 먼저
+		}
+
+		function bar() {
+			console.log(x);
+		}
+
+		foo(); //1
+		bar(); //1
+
+		//렉시컬  스컬프는 함수를 어디서 호출하는지가 아니라 어디서 선언하였는지에 따라 결정된다.
+	</script> -->
+
+	<!-- <script>
+		var x = 20;
+
+		function foo() {
+			x = 22;
+			return x * x;
+		}
+
+		//foo();
+		console.log(foo());
+		console.log(x);
+
+	</script> -->
+
+	<script>
+		// 11. 즉시실행함수를 이용한 전역변수 사용 억제
+		// 이 방법을 사용하면 전역변수를 만들지 않으므로 라이브러리에 자주 사용된다.
+		// 즉시 실행 함수는 즉시 실행되고 그 후 전역에서 바로 사라진다.
+		(function() {
+			var MYAPP = {};
+			MYAPP.student = {
+				name: 'Lee',
+				gender : 'Male'
+			};
+
+			console.log(MYAPP.student.name);
+		}());
+
+		//console.log(MYAPP.student.name);
+	</script>
+
+
+}
+</head>
+<body>
+
+</body>
+</html>

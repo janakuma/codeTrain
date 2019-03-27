@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		function Person(name) {
+			this.name = name;
+		}
+
+		Person.prototype.setName = function(name) {
+			this.name = name;
+		};
+
+		Person.prototype.getName = function(){
+			return this.name;
+		};
+
+		var me = new Person('lee');
+		var you = new Person('kim');
+		var him = new Person('choi');
+
+		console.log(me.__proto__ === Person.prototype);
+		//오브젝트 생성자 함수는 상위 객체의 프로토타입과 동일하다.
+	</script>
+</head>
+<body>
+
+</body>
+</html>
