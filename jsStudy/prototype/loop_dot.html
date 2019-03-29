@@ -16,7 +16,7 @@
         //생성자 함수
         function Particle() {
             this.x = random(0, 600);
-            this.y = random(0, 300);
+            this.y = random(0, 600);
             /*this.show = function() {
                 point(this.x, this.y);
             }*/
@@ -30,8 +30,8 @@
             this.x += random(5, -5);
             this.y += random(5, -5);
 
-            console.log(this.x);
-            console.log(this.y);
+            /*console.log(this.x);
+            console.log(this.y);*/
         }
 
         Particle.prototype.show = function() {
@@ -47,7 +47,7 @@
         p5.Vector.prototype.double = function() {
             this.x *= 2;
             this.y *= 2;
-            this.z *= 2 ;
+            this.z *= 2;
         }
 
         function setup() {
@@ -55,22 +55,16 @@
             p = new Particle(); //인스턴스 생성
             v = createVector(3,4);
 
-            for(var i = 0; i < 50; i++) {
+            for(var i = 0; i < 100; i++) {
                 c[i] = new Confetti();
             }
         }
 
         function draw() {
-            for(var i = 0; i < 50; i++) {
+            for(var i = 0; i < 100; i++) {
                 c[i].update();
                 c[i].show();
             }
-
-
-
-
-
-
         }
 
     </script>

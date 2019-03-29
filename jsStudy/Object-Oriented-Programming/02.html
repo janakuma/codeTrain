@@ -64,7 +64,14 @@ console.log(child instanceof Parent); // true
 console.log(child instanceof Child);  // true
 
 
+/*프로토타입 패턴상속은 Object.create를 사용하여 패턴 상속을 한다.
+클래스 패턴의 단점은 new 연산자가 필요없으며 생성자 링크도 파괴되지 않으며, 객체리터럴에도 사용할 수 있다.*/
 
+var child = Object.create(Parent.prototype);
+child.name = 'child'
+child.sayHi()
+
+console.log(Parent.prototype);
 	</script>
 </head>
 <body>

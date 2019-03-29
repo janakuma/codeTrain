@@ -4,48 +4,51 @@
 	<meta charset="UTF-8">
 	<title>Document</title>
 	<script>
-		function Person() {
-			this.name = arg;
+
+		var fruits = [
+			'1',
+			'2',
+			'3',
+			'4',
+			'5'
+		];
+		var getText = document.getElementById("inputText").value;
+		var list = document.getElementById("list");
+
+
+
+		/*for(var i = 0; i < arr.length; i++) {
+			console.log(arr[i]);
 		}
 
-		Function.prototype.method = function(name, func) {
-			this.prototype[name] = func;
+		for(let a of arr) {
+			console.log(a);
+		}*/
+
+
+		for(let fruit of fruits) {
+			list.insertAdjacentHTML('beforeend',`<li>${getText}</li>`);
 		}
 
-		Person.method("setName", function(value) {
-			this.name = value;
-		});
+		function itemAdd(getText) {
+			var self = getText;
 
-		Person.method("getName", function(value) {
-			return this.name;
-		});
-
-		function Student(arg) {
-
+			fruits.push(self);
+			list.insertAdjacentHTML('beforeend',`<li>${self}</li>`);
+			console.log(fruits);
 		}
-
-		function F(){};
-		F.prototype = Person.prototype;
-		Student.prototype = new F();
-		Student.prototype.constructor = Student;
-
-		console.log(
-			Student.prototype.constructor === Student
-		 )
-
-
-		/*
-		Student.super = Person.prototype;
-
-
-
-		var me = new Student();
-		me.setName('zzoon');
-		console.log(me.getName());*/
 
 	</script>
 </head>
 <body>
+	<input type="text" id="inputText" value="">
+	<button onclick="itemAdd()">PUSH</button>
+
+
+	<ul id="list">
+
+	</ul>
+
 
 </body>
 </html>
