@@ -15,17 +15,6 @@
 		var getText = document.getElementById("inputText").value;
 		var list = document.getElementById("list");
 
-
-
-		/*for(var i = 0; i < arr.length; i++) {
-			console.log(arr[i]);
-		}
-
-		for(let a of arr) {
-			console.log(a);
-		}*/
-
-
 		for(let fruit of fruits) {
 			list.insertAdjacentHTML('beforeend',`<li>${getText}</li>`);
 		}
@@ -39,6 +28,8 @@
 		}
 
 	</script>
+
+	<script></script>
 </head>
 <body>
 	<input type="text" id="inputText" value="">
@@ -48,6 +39,18 @@
 	<ul id="list">
 
 	</ul>
+
+
+	<script>
+		var obj = {
+			name: 'inkweon',
+			age: 30,
+			gender: 'male'
+		}
+
+		var test = obj;
+
+	</script>
 
 
 </body>

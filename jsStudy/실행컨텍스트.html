@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>실행 컨텍스트</title>
+
+	<!--
+		실행 컨텍스트: 기존 언어에서는 콜스택이라고 함
+	-->
+
+	<script>
+		//클로저는 독립적인 변수를 가리키는 함수이다. 또는 클로저 안에 정의된 함수는 만들어진 환경을 기억한다.
+		//흔히 함수 내에서 함수를 정의하고 사용하면 클로저라고 한다.
+		//하지만 정의한 함수를 리턴하고 사용은 바깥에서 하게 된다.
+
+		function getClosure() {
+			var text = "variable 1";
+
+			return function() {
+				return text;
+			};
+		}
+
+		var closure = getClosure();
+		console.log(closure());
+	</script>
+
+	<script>
+		var base = 'Hello';
+		function sayHello(name) {
+			var text = base + name;
+			return function() {
+				console.log(text);
+			};
+		}
+
+		var hello1 = sayHello('승민');
+		var hello2 = sayHello('카일');
+		var hello3 = sayHello('네로');
+
+		hello1(); //hello 승민
+		hello2(); //hello 카일
+		hello3(); //hello 네로
+
+		//출력된 결과를 보면 text 변수가 동적으로 변화하고 있는 것처럼 보인다. 셀제로는 text라는 변수 자체가 여러번 생성된 것이다.
+		//즉  hello1() hello2() hello3()은 서로 다른 환경을 가지고 있다.
+	</script>
+
+	<script>
+		//클로저를 통한 은닉화
+		//변수명에 언더스코어를 포함했기 때문에 일반적인 자바스크립트 네이밍 컨벤션을 생각해 봤을때 이 벼수는 private variable으로 쓰고 싶다는 의도를 알 수 있다.
+		//하지만 실제로는 여전히 외부에서도 쉽게 접근가능한 변수일 뿐이다.
+
+		function Hello(name) {
+			this._name = name;
+		}
+
+		Hello.prototype.say = function() {
+			console.log('Hello,' + this._name);
+		}
+
+		var Hello1 = new Hello('승민');
+		var Hello2 = new Hello('카일');
+		var Hello3 = new Hello('네로');
+
+		Hello1.say(); //Hello,승민
+		Hello2.say(); //Hello,카일
+		Hello3.say(); //Hello,네로
+		Hello1._name = 'anonymous'; //쉽게 접근이 가능해진다.(bad)
+		Hello1._name = '프라우'; //쉽게 접근이 가능해진다.(bad)
+		Hello1.say(); //Hello,anonymous
+
+
+
+		//이 경우에 클로저를 사용하여 외부에서 변수에 직접 접근하는 것을 제한할 수 있다.
+		function hello(name) {
+			var _name = name;
+			return function() {
+				console.log('Hello, ' + _name);
+			}
+		}
+
+		var hello1 = new hello('승민');
+		var hello2 = new hello('카일');
+		var hello3 = new hello('네로');
+
+		hello3._name = "데니로"; //은닉화가 됨
+
+		hello1();
+		hello2();
+		hello3();
+
+		hello1 = null;
+		hello2 = null;
+		hello3 = null;
+	</script>
+
+	<script>
+		//반복문 클로저
+		//닳고 닳은 예제이긴 하지만, 그렇다고 빠뜨리긴 아쉬운 예제이므로 여기서도 한 번 짚고 넘거야가 할 것 같다
+
+		//BAD
+		var i = 0;
+		for(i = 0; i < 10; i++) {
+			setTimeout(function() {
+				console.log(i)
+			}, 100);
+		}
+
+		//GOOD
+		var i;
+		for(i = 0; i < 10; i++) {
+			(function(j) {
+				setTimeout(function() {
+					console.log(j);
+				})
+			})(i); //i의 인자 값을 j에 넣어주는 작용을 해주고 있다.
+		}
+
+
+		//이게 정석
+		var i;
+		for(i = 0; i < 10; i++) {
+
+			(function(j) {
+				setTimeout(function() {
+					console.log(j);
+				})
+			})(i)
+		}
+
+
+		//다른 방법으로 구현
+		var i;
+		for(i = 0; i < 10; i++) {
+			var j = i;
+			function aa(j) {
+				setTimeout(function() {
+					console.log(j);
+				})
+			}
+			aa(i)
+		}
+	</script>
+
+	<script>
+		function HelloFunc(func) {
+			this.greeting = 'hello';
+		}
+
+		HelloFunc.prototype.call = function(func) {
+			func ? func(this.greeting) : this.func(this.greeting);
+		}
+
+		var userFunc = function(greeting) {
+			//console.log(greeting);
+		}
+
+		var objHello = new HelloFunc();
+		objHello.func = userFunc;
+		//objHello.call();
+
+		function saySomething(obj, metThod, name) {
+			return (function(greeting) {
+				return obj[methodName](greeting, name);
+			})
+		}
+
+		function newObj(obj, name) {
+			obj.func = saySomething(this, "who", name)
+			return obj;
+		}
+
+		newObj.prototype.who = function(greeting, name) {
+			console.log(greeting + "" + (name || "everyone"));
+		}
+
+
+	</script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h3>1. Symbol이란?</h3>
+	<p>
+		symbol은 es6에서 새롭게 추가된 7번째 타입으로 변경 불가능한 원시 타입의 값이다.
+		심볼은 주로 이름의 충돌 위험이 없는 유일한 객체의 프로퍼티 키를 만들기 위해 사용한다.
+	</p>
+
+	<h3>Symbol의 생성</h3>
+	<p>
+		Symbold은 함수로 생성한다. Symbol()함수는 호출될 때마다 Symbol의 값을 생성한다.
+		이때 생성된 Symbol은 객체가 아니라 변경 불가능한 원시타입의 값이다.
+	</p>
+
+	<script>
+		let mySymbol = Symbol();
+
+		console.log(mySymbol);
+		console.log(typeof mySymbol);
+	</script>
+
+	<p>
+		symbol 함수는 string, number, boolean과 같이 래퍼 객체를 생성하는 생성자 함수와는 달리 new 연산자를 사용하지 않는다.
+		//new Symbol(); // TypeError: Symbol is not a constructor
+	</p>
+
+	<p>Symbol() 함수에는 문자열을 인자로 전달할 수 있다. 이 문자열은 symbol 생성에 어떠한 영향을 주지 않으며 다만 생성된 Symbol에 대한 설명으로 디버깅 용도로만 사용된다.</p>
+
+	<script>
+		let symbolWithDesc = Symbol('ungmo2');
+
+		console.log(symbolWithDesc);
+		console.log(symbolWithDesc === Symbol('ungmo2'));
+
+	</script>
+
+	<p>Symbol은 함수 객체이다.</p>
+
+	<script>
+		let anObject = {
+			name: 'bob',
+			age: 20,
+			friends: ['john, kim. peter'],
+			getName: function() {
+				return this.name;
+			}
+		}
+
+		for(let key of anObject) {
+			console.log('key', key);
+		}
+	</script>
+
+	<script>
+		let myArray = [1,2,3,4,5];
+		let iterator = myArray[Symbol.iterator]();
+		/*console.log(iterator.next());
+		console.log(myArray.length);*/
+
+		for(let i = 0; i < myArray.length - 1; i++) {
+			iterator.next();
+		}
+	</script>
+
+
+	<script>
+		function get(url) {
+			return new Promise((resolve, reject) => {
+
+				const xhr = XMLHttpRequest();
+
+				xhr.onreadystatechange = function() {
+					if(xhr.readyState === new XMLHttpRequest.DONE) {
+
+						if(xhr.status === 200) {
+							resolve(xhr.response);
+						} else {
+							reject('Error : ' + xhr.status);
+						}
+					}
+				}
+
+				xhr.open('GET', url);
+				xhr.send();
+
+			})
+		}
+
+
+
+		const p1 = new Promise((resolve, reject) => {
+			resolve('Success');
+		});
+
+		p1.then((value) => {
+			console.log(value);
+			return Promise.reject('Oh, Oh!')
+		})
+		.catch((e) => {
+			console.log(e);
+
+		})
+
+	</script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

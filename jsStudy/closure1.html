@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+
+</head>
+<body>
+	<button onclick="counting(0)">클릭0</button>
+	<button onclick="counting(1)">클릭1</button>
+	<button onclick="counting(2)">클릭2</button>
+	<button onclick="counting(3)">클릭3</button>
+
+	<ul id="one"></ul>
+
+	<script>
+		// <div id="one">one</div>
+		var d1 = document.getElementById('one');
+		d1.insertAdjacentHTML('afterend', '<div id="two">two</div>');
+	</script>
+
+
+</body>
+</html>
