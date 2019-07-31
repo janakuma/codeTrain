@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="http://scrollmagic.io/assets/css/examples.css">
+
+
+    <script type="text/javascript" src="http://scrollmagic.io/assets/js/lib/jquery.min.js"></script>
+    <script type="text/javascript" src="http://scrollmagic.io/assets/js/lib/highlight.pack.js"></script>
+    <script type="text/javascript" src="http://scrollmagic.io/assets/js/lib/modernizr.custom.min.js"></script>
+    <script type="text/javascript" src="http://scrollmagic.io/assets/js/examples.js"></script>
+
+    <script type="text/javascript" src="http://scrollmagic.io/assets/js/lib/greensock/TweenMax.min.js"></script>
+    <script type="text/javascript" src="http://scrollmagic.io/scrollmagic/uncompressed/ScrollMagic.js"></script>
+    <script type="text/javascript" src="http://scrollmagic.io/scrollmagic/uncompressed/plugins/animation.gsap.js"></script>
+    <script type="text/javascript" src="http://scrollmagic.io/scrollmagic/uncompressed/plugins/debug.addIndicators.js"></script>
+    <style>
+        * { margin: 0; padding: 0; }
+        .demo { height: 100vh; position: relative; overflow: hidden;}
+        .demo:nth-of-type(1) { background-color: #eaeaea; }
+        .demo:nth-of-type(2) { height: #a33; }
+        [class^="box"] {
+            display: block;
+            width: 150px; height: 200px;
+            background-color: green;
+        }
+
+        i.point1 {
+            position: absolute;
+            right: 0;
+            display: inline-block;
+            height: 0;
+            width: 50px;
+            border-top: 1px solid red;
+        }
+
+        .slider {
+            position: relative;
+            display: flex;
+            width: 400%;
+            height: 100%;
+        }
+        .slider ul {
+        }
+
+        .slider li {
+            width: 25%; height: 100%;
+        }
+
+    </style>
+</head>
+<body>
+    <section id="titlechart">
+        <div id="description">
+            <h1 class="badge gsap" title="This example requires the the Greensock Animation Platform.">Simple Tweening</h1>
+            <h2>Two examples of basic animation.</h2>
+            <ol>
+                <li>When no duration is defined for the scene, the tween will simply start playing when the scroll reaches
+                    the trigger position.</li>
+                <li>If the scene has a duration the progress of the tween will directly correspond to the scroll position.
+                </li>
+            </ol>
+            <p>
+                This example uses the shorthand version of <a
+                    href="../../docs/animation.GSAP.html#Scene.setTween">Scene.setTween()</a> to add <a
+                    href="http://greensock.com/docs/#/HTML5/GSAP/TweenMax/to/" target="_blank">TweenMax.to()</a>
+                animations.<br>
+                To see how to build more advanced tweens check out the <a href="../advanced/advanced_tweening.html">Advanced
+                    Tweening Example</a><a>.
+                </a></p><a>
+            </a><a href="#" class="viewsource">view source</a>
+        </div>
+    </section>
+
+    <section class="demo">
+        <div class="spacer s2"></div>
+        <div id="trigger1" class="spacer s0"></div>
+        <div id="animate1" class="box2 skin"
+            style="background-color: rgb(237, 159, 76);transform: matrix(1, 0, 0, 1, 0, 0);">
+            <p>You wouldn't like me, when I'm angry!</p>
+            <a href="#" class="viewsource">view source</a>
+        </div>
+        <div class="spacer s2"></div>
+    </section>
+
+    <section class="demo" style="text-align: left;">
+        <i  id="trigger21" class="point1" style="top: 50px;"></i>
+        <div class="spacer s1"></div>
+        <!-- <div id="trigger21" class="spacer s1"></div>
+        <div id="trigger22" class="spacer s1"></div>
+        <div id="trigger23" class="spacer s1"></div> -->
+        <div class="spacer s0"></div>
+        <div class="box1">BOX1</div>
+        <div id="trigger22" class="box2">BOX2</div>
+        <div id="trigger23" class="box3">BOX3</div>
+        <div class="spacer s2"></div>
+    </section>
+
+    <div class="spacer s_viewport"></div>
+
+    <section class="demo" style="text-align: left;" id="pinContainer">
+        <ul class="slider">
+            <li style="background: chartreuse"></li>
+            <li style="background:chocolate"></li>
+            <li style="background:cornflowerblue"></li>
+            <li style="background: #a33"></li>
+        </ul>
+    </section>
+
+    <script>
+
+        $(function(){
+            // init controller
+
+
+            var controller = new ScrollMagic.Controller();
+
+            // build scene
+            var scene = new ScrollMagic.Scene({
+                triggerElement: "#trigger1"
+            })
+                .setTween("#animate1", 0.5, { backgroundColor: "green", scale: 2.5 }) // trigger a TweenMax.to tween
+                .addIndicators({ name: "1 (duration: 0)" }) // add indicators (requires plugin)
+                .addTo(controller);
+
+            var scene = new ScrollMagic.Scene({
+                triggerElement: "#trigger21", duration: 300
+            })
+                .setTween(".box1", { margin: '0px 0 0 100px' })// the tween durtion can be omitted and defaults to 1
+                .addIndicators({ name: "trigger21 (duration: 300)" }) // add indicators (requires plugin)
+                .addTo(controller);
+
+            var scene = new ScrollMagic.Scene({
+                triggerElement: "#trigger22", duration: 300
+            })
+                .setTween(".box2", { margin: '0px 0 0 200px' })// the tween durtion can be omitted and defaults to 1
+                .addIndicators({ name: "trigger22 (duration: 300)" }) // add indicators (requires plugin)
+                .addTo(controller);
+
+            var scene = new ScrollMagic.Scene({
+                triggerElement: "#trigger23", duration: 300
+            })
+                .setTween(".box3", { margin: '0px 0 0 300px', opacity: '0' })// the tween durtion can be omitted and defaults to 1
+                .addIndicators({ name: "trigger23 (duration: 300)" }) // add indicators (requires plugin)
+                .addTo(controller);
+
+
+
+            // define movement of panels
+            var wipeAnimation = new TimelineMax()
+                // animate to second panel
+                .to(".slider", 0.5, { z: -150, delay: 1 })
+                .to(".slider", 1, { x: "-25%" })	// move in to first panel
+                .to(".slider", 0.5, { z: 0 })				// move back to origin in 3D space
+                // animate to third panel
+                .to(".slider", 0.5, { z: -150, delay: 1 })
+                .to(".slider", 1, { x: "-50%" })
+                .to(".slider", 0.5, { z: 0 })
+                // animate to forth panel
+                .to(".slider", 0.5, { z: -150, delay: 1 })
+                .to(".slider", 1, { x: "-75%" })
+                .to(".slider", 0.5, { z: 0 });
+
+            // create scene to pin and link animation
+            new ScrollMagic.Scene({
+                triggerElement: "#pinContainer",
+                triggerHook: "onLeave",
+                duration: "500%"
+            })
+                .setPin("#pinContainer")
+                .setTween(wipeAnimation)
+                .addIndicators() // add indicators (requires plugin)
+                .addTo(controller);
+        })
+    </script>
+
+</body>
+</html>
