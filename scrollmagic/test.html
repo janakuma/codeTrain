@@ -123,7 +123,7 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
+            width: 400px;
             height: 200px;
             background-color: #333;
         }
@@ -237,7 +237,7 @@
                 new ScrollMagic.Scene({
                     triggerElement: "#pinMotion",
                     triggerHook: "onCenter",
-                    duration: '100%'
+                    duration: '100'
                 })
                 .setPin( this ) // trigger a TweenMax.to tween
                 .addIndicators({ name: "pinMotion (duration: 0)" }) // add indicators (requires plugin)
